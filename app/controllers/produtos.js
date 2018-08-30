@@ -15,7 +15,7 @@ module.exports.create = function(application, req, res)
         res.send(erros);
     }
     else{
-        console.log('-------------\nProduto.create \n'+dadosform.nome +'\n' + dadosform.categoria +'\n'+ dadosform.preco_venda+'\n -------------');
+        console.log('-------------\nProduto.create \n'+dadosform.nome +'\n' + dadosform.categoria +'\n'+ dadosform.preco_venda+'\n'+dadosform.unidade_produto+ '-------------');
         var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.create(dadosform,req, res);
@@ -23,4 +23,11 @@ module.exports.create = function(application, req, res)
 
         //res.send('cadastrado com sucesso'+'\n'+ dadosform.nome+ '\n' + dadosform.categoria+ '\n' + dadosform.preco_venda);
     }
+}
+module.exports.produtos = function (application, req, res) {
+    // var connection = dbConnection();
+    // connection.query('select * from Usuario', function (err, result) {
+    //   console.log(result);
+    //  });
+    res.render('produtos');
 }

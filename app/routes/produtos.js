@@ -4,7 +4,7 @@ module.exports = function (application) {
     });
 
     application.get('/produtos', function (req, res) {
-        res.send('você está indo bem');
+        application.app.controllers.produtos.produtos(application, req, res);
     });
 
 }
