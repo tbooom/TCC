@@ -29,5 +29,7 @@ module.exports.produtos = function (application, req, res) {
     // connection.query('select * from Usuario', function (err, result) {
     //   console.log(result);
     //  });
-    res.render('produtos');
+    var connection = application.config.dbConnection;
+        var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
+        ProdutosDAO.show(req, res);
 }

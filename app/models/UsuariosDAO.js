@@ -20,7 +20,7 @@ UsuariosDAO.prototype.autenticar = function (usuario, req, res) {
         {
             res.render('lobby');
         } else{
-            res.send('usuário nao encontrado');
+            res.send('usuário nao encontrado'); 
         }
         
     });
