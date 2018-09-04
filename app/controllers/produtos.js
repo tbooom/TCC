@@ -19,7 +19,7 @@ module.exports.create = function(application, req, res)
         var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.create(dadosform,req, res);
-
+        application.app.controllers.produtos.produtos(application, req, res);
 
         //res.send('cadastrado com sucesso'+'\n'+ dadosform.nome+ '\n' + dadosform.categoria+ '\n' + dadosform.preco_venda);
     }
@@ -29,6 +29,7 @@ module.exports.produtos = function (application, req, res) {
     // connection.query('select * from Usuario', function (err, result) {
     //   console.log(result);
     //  });
+    console.log('-----------\nchegou na autenticação Produtos.show \n' +'Sua sessão está marcada como: ' + req.session.autorizado+'\n--------');
     var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.show(req, res);

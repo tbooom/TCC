@@ -2,7 +2,11 @@ function ProdutosDAO(connection) {
     this._connection = connection();
 }
 ProdutosDAO.prototype.create = function (produto, req, res) {
-    console.log('chegou na autenticação Produtos.create');
+
+
+    console.log();
+
+    console.log('-----------\nchegou na autenticação Produtos.create \n' +'Sua sessão está marcada como' + req.session.autorizado+'\n--------');
 
     var query = `INSERT INTO bdguinsneri.Produtos VALUES(0,'${produto.nome}','${produto.categoria}','${produto.preco_compra}','${produto.preco_venda}','${produto.unidade_produto}' );`
 
@@ -16,10 +20,6 @@ ProdutosDAO.prototype.create = function (produto, req, res) {
         // }
         if (error) {
             res.send('Deu ruin, olha só: ' + error);
-        }
-        else {
-            res.send('tudo certo !');
-
         }
 
     });

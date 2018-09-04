@@ -5,7 +5,7 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Overview</li>
+            <li class="breadcrumb-item active">Produtos</li>
           </ol>
 
           <!-- Icon Cards-->
@@ -79,19 +79,69 @@
           <!-- Area Chart Example-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fas fa-chart-area"></i>
-              Area Chart Example</div>
+              <i class="fas fa-table"></i>
+              Cadastro de Novos Produtos</div>
             <div class="card-body">
-              <canvas id="myAreaChart" width="100%" height="30"></canvas>
+            
+            
+            
+            <form action="produtos/create" method="post">
+            <div class="form-row ">
+              <div class="col">
+              <label for="inputEmail4">Nome</label>
+              </div>
+              <div class="col">
+              <label for="inputEmail4">Categoria</label>
+              </div>
+              <div class="col">
+              <label for="inputEmail4">Preço de Compra</label>
+              </div>
+              <div class="col">
+              <label for="inputEmail4">Preço de Venda</label>
+              </div>
+              <div class="col">
+              <label for="inputEmail4">Unidades</label>
+              </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+              <div class="form-row form-group">
+                <div class="col">
+                  <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome">
+                </div>
+                <div class="col">
+                  <input type="text" id="categoria" name="categoria"  class="form-control" placeholder="Categoria">
+                </div>
+                <div class="col">
+                  <input type="text" id="preco_compra" name="preco_compra"  class="form-control" placeholder="Preço de compra">
+                </div>
+                <div class="col">
+                  <input type="text" id="preco_venda" name="preco_venda"  class="form-control" placeholder="Preço de venda">
+                </div>
+                <div class="col">
+                  <input type="text" id="unidades" name="unidades"  class="form-control" placeholder="Unidades">
+                </div>
+               
+              </div>
+              <button type="submit" id="btn_produtos_cadastrar" class="btn btn-primary">Cadastrar</button>
+              </div>
+            </form>
+
+
+
+            
+      
+            
+            </div>
+            
           </div>
 
+
+
+          
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Data Table Example</div>
+              Produtos</div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -105,7 +155,7 @@
                      
                     </tr>
                   </thead>
-                 <!-- <tfoot>
+                 <tfoot>
                     <tr>
                     <th>Nome</th>
                     <th>Categoria</th>
@@ -113,7 +163,7 @@
                     <th>Preço de venda</th>
                     <th>Unidades</th>
                     </tr>
-                  </tfoot>-->
+                  </tfoot>
                   <tbody>
                  
                     <%for(var i=0; i<produtos.length; i++){%>
@@ -134,7 +184,9 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            
           </div>
+          
 
         </div>
+       
