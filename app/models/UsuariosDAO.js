@@ -18,7 +18,7 @@ UsuariosDAO.prototype.autenticar = function (usuario, req, res) {
         }
         if (req.session.autorizado)
         {
-            res.render('lobby');
+            application.app.controllers.lobby.lobby(application, req, res);
         } else{
             res.send('usuário nao encontrado'); 
         }

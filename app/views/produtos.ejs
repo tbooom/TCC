@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="produtos"  class="container-fluid produtos">
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
@@ -75,7 +75,7 @@
               </div>
             </div>
           </div>
-
+         
           <!-- Area Chart Example-->
           <div class="card mb-3">
             <div class="card-header">
@@ -85,7 +85,7 @@
             
             
             
-            <form action="produtos/create" method="post">
+            <form method="get" action="/lobby">
             <div class="form-row ">
               <div class="col">
               <label for="inputEmail4">Nome</label>
@@ -108,7 +108,7 @@
                   <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome">
                 </div>
                 <div class="col">
-                  <input type="text" id="categoria" name="categoria"  class="form-control" placeholder="Categoria">
+                  <input type="text" id="categoria"  name="categoria"  class="form-control" placeholder="Categoria">
                 </div>
                 <div class="col">
                   <input type="text" id="preco_compra" name="preco_compra"  class="form-control" placeholder="Preço de compra">
@@ -124,8 +124,7 @@
               <button type="submit" id="btn_produtos_cadastrar" class="btn btn-primary">Cadastrar</button>
               </div>
             </form>
-
-
+          
 
             
       
@@ -186,7 +185,35 @@
             </div>
             
           </div>
-          
+          <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    $( "#btn_produtos_cadastrar" ).click(function( event ) {
+        event.preventDefault();
+       
+      });
+    $(document).ready(function()
+    {
+      
+      $('#btn_produtos_cadastrar').click(function()
+      {
+        $.ajax({
+          url:'produtos/create',
+          method: 'post',
+          dataType: 'json',
+          contentType: 'application/x-www-form-urlencoded',
+         data: {nome:"guilherme", categoria:"alousilvio19", preco_compra:"111", preco_venda:"111", unidade_produto:"11"}
+        }).done(alert('deu bom'))
+      });
+      
+      
+
+    });
+  </script>
+
+
+
 
         </div>
        

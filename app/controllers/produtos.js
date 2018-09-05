@@ -1,6 +1,7 @@
 module.exports.create = function(application, req, res)
 {
     var dadosform = req.body;
+    console.log('\nreq.body: '+dadosform.nome);
 
     req.assert('nome', 'O Campo de nome não pode ser vazio').notEmpty();
     req.assert('categoria','A Identificação do produto nao pode ser vazio').notEmpty();
@@ -15,7 +16,7 @@ module.exports.create = function(application, req, res)
         res.send(erros);
     }
     else{
-        console.log('-------------\nProduto.create \n'+dadosform.nome +'\n' + dadosform.categoria +'\n'+ dadosform.preco_venda+'\n'+dadosform.unidade_produto+ '-------------');
+        console.log('-------------\nProduto.create \n'+dadosform.nome +'\n' + dadosform.categoria +'\n'+ dadosform.preco_venda+'\n'+dadosform.unidade_produto+ '\n-------------');
         var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.create(dadosform,req, res);
