@@ -1,4 +1,5 @@
-<div id="produtos"  class="container-fluid produtos">
+<div id="produtos" class="produtos" >
+<div  class="container-fluid">
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
@@ -185,6 +186,7 @@
             </div>
             
           </div>
+        </div>
           <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -198,22 +200,34 @@
       
       $('#btn_produtos_cadastrar').click(function()
       {
+        debugger;
         $.ajax({
           url:'produtos/create',
           method: 'post',
-          dataType: 'json',
+          // dataType: 'json',
           contentType: 'application/x-www-form-urlencoded',
-         data: {nome:"guilherme", categoria:"alousilvio19", preco_compra:"111", preco_venda:"111", unidade_produto:"11"}
-        }).done(alert('deu bom'))
+          data: {nome:"guilherme", categoria:"guilherme 144", preco_compra:"112", preco_venda:"111", unidade_produto:"11"},
+          success : function( result )
+          {
+            debugger;
+            //$('#produtos').html();
+            $('#produtos').innerHTML = "";
+            debugger;
+            $('#produtos').html(result);
+            alert('foi');
+            debugger;
+          },
+
+          error: function(ex){
+
+            debugger;
+          }
+      })
       });
       
       
 
     });
   </script>
-
-
-
-
         </div>
        

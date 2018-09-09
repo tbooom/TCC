@@ -6,7 +6,7 @@ ProdutosDAO.prototype.create = function (produto, req, res) {
 
     console.log();
 
-    console.log('-----------\nchegou na autenticação Produtos.create \n' +'Sua sessão está marcada como' + req.session.autorizado+'\n--------');
+    console.log('-----------\nchegou na autenticação Produtos.create \n' + 'Sua sessão está marcada como' + req.session.autorizado + '\n--------');
 
     var query = `INSERT INTO bdguinsneri.Produtos VALUES(0,'${produto.nome}','${produto.categoria}','${produto.preco_compra}','${produto.preco_venda}','${produto.unidade_produto}' );`
 
@@ -24,7 +24,7 @@ ProdutosDAO.prototype.create = function (produto, req, res) {
 
     });
     this._connection.end(function (err) {
-        console.log('A conexão com o banco de dados foi encerrada');
+        console.log('A conexão com o banco de dados produto.create foi encerrada');
     });
 }
 ProdutosDAO.prototype.show = function (req, res) {
@@ -32,15 +32,18 @@ ProdutosDAO.prototype.show = function (req, res) {
     var query = `select * from bdguinsneri.Produtos`;
     this._connection.query(query, function (error, result) {
         console.log('erro: \n' + error);
-        
-        
-        if (error)
-        {
+
+
+        if (error) {
             res.send('Deu ruin, olha só: ' + error);
+        } else {
+            res.render('produtos', {
+                produtos: result
+            })
         }
-        else{
-            res.render('produtos', {produtos:result})
-        }
+    });
+    this._connection.end(function (err) {
+        console.log('A conexão com o banco de dados produtos.show foi encerrada');
     });
 }
 

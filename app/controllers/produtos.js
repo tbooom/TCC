@@ -20,10 +20,11 @@ module.exports.create = function(application, req, res)
         var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.create(dadosform,req, res);
-        application.app.controllers.produtos.produtos(application, req, res);
+        
 
         //res.send('cadastrado com sucesso'+'\n'+ dadosform.nome+ '\n' + dadosform.categoria+ '\n' + dadosform.preco_venda);
     }
+    application.app.controllers.produtos.produtos(application, req, res);
 }
 module.exports.produtos = function (application, req, res) {
     // var connection = dbConnection();
