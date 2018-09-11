@@ -1,7 +1,7 @@
-function ProdutosDAO(connection) {
+function FornecedoresDAO(connection) {
     this._connection = connection();
 }
-ProdutosDAO.prototype.create = function (produto, req, res) {
+FornecedoresDAO.prototype.create = function (produto, req, res) {
 
 
     console.log();
@@ -30,7 +30,7 @@ ProdutosDAO.prototype.create = function (produto, req, res) {
         console.log('A conexão com o banco de dados produto.create foi encerrada');
     });
 }
-ProdutosDAO.prototype.show = function (req, res) {
+FornecedoresDAO.prototype.show = function (req, res) {
     console.log('chegou na autenticação Produtos.show');
     var query = `select * from bdguinsneri.Produtos`;
     this._connection.query(query, function (error, result) {
@@ -50,7 +50,7 @@ ProdutosDAO.prototype.show = function (req, res) {
         console.log('A conexão com o banco de dados produtos.show foi encerrada');
     });
 }
-ProdutosDAO.prototype.delete = function(req, res, id)
+FornecedoresDAO.prototype.delete = function(req, res, id)
 {
     var query = `DELETE FROM bdguinsneri.Produtos WHERE id_produto = ${id}`;
     this._connection.query(query, function (error, result) {
@@ -74,7 +74,7 @@ ProdutosDAO.prototype.delete = function(req, res, id)
     });
 
 } 
-ProdutosDAO.prototype.delete = function(req, res, id)
+FornecedoresDAO.prototype.delete = function(req, res, id)
 {
     var query = `DELETE FROM bdguinsneri.Produtos WHERE id_produto = ${id}`;
     this._connection.query(query, function (error, result) {

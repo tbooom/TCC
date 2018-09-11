@@ -13,7 +13,8 @@ module.exports.create = function(application, req, res)
     console.log(erros);
     if(erros)
     {
-        res.send(erros);
+        res.status(500).send(erros);
+       
     }
     else{
         console.log('-------------\nProduto.create \n'+dadosform.nome +'\n' + dadosform.categoria +'\n'+ dadosform.preco_venda+'\n'+dadosform.unidade_produto+ '\n-------------');
@@ -24,7 +25,7 @@ module.exports.create = function(application, req, res)
 
         //res.send('cadastrado com sucesso'+'\n'+ dadosform.nome+ '\n' + dadosform.categoria+ '\n' + dadosform.preco_venda);
     }
-    application.app.controllers.produtos.produtos(application, req, res);
+    
 }
 module.exports.produtos = function (application, req, res) {
     // var connection = dbConnection();
@@ -35,4 +36,18 @@ module.exports.produtos = function (application, req, res) {
     var connection = application.config.dbConnection;
         var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
         ProdutosDAO.show(req, res);
+}
+module.exports.delete = function(application, req, res, id)
+{
+    console.log('-----------\nchegou na autenticação Produtos.delete \n' +'Sua sessão está marcada como: ' + req.session.autorizado+'\n--------');
+    var connection = application.config.dbConnection;
+        var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
+        ProdutosDAO.delete(req, res, id);
+}
+module.exports.update = function(application, req, res, id)
+{
+    console.log('-----------\nchegou na autenticação Produtos.update \n' +'Sua sessão está marcada como: ' + req.session.autorizado+'\n--------');
+    var connection = application.config.dbConnection;
+        var ProdutosDAO = new application.app.models.ProdutosDAO(connection);
+        ProdutosDAO.update(req, res, id);
 }

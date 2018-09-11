@@ -87,6 +87,7 @@
             
             
             <form method="get" action="/lobby">
+            <div id="msg-erro" class="msg-erro"></div>
             <div class="form-row ">
               <div class="col">
               <label for="inputEmail4">Nome</label>
@@ -144,36 +145,42 @@
               Produtos</div>
             <div class="card-body">
               <div class="table-responsive">
+              <div id="msg-erro-produto" class="msg-erro-produto"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                    <th>Id</th>
                       <th>Nome</th>
                       <th>Categoria</th>
                       <th>Preço de compra</th>
                       <th>Preço de venda</th>
                       <th>Unidades</th>
-                     
+                      <th>Ações</th>
                     </tr>
                   </thead>
                  <tfoot>
                     <tr>
+                    <th>Id</th>
                     <th>Nome</th>
                     <th>Categoria</th>
                     <th>Preço de compra</th>
                     <th>Preço de venda</th>
                     <th>Unidades</th>
+                    <th>Ações</th>
                     </tr>
                   </tfoot>
-                  <tbody>
+                  <tbody id="arrayprodutos"  id="arrayprodutos">
                  
                     <%for(var i=0; i<produtos.length; i++){%>
                   
-                  <tr>    
+                  <tr>
+                  <td><%=produtos[i].id_produto%></td>    
                   <td><%=produtos[i].nome%></td>
                   <td><%=produtos[i].categoria%></td>
                   <td><%=produtos[i].preco_compra%></td>
                   <td><%=produtos[i].preco_venda%></td>
                   <td><%=produtos[i].unidade_produto%></td>
+                 <td align="center"><i  class="btn btn-primary update fa fa-wrench" data-id="<%=produtos[i].id_produto%>"></i>&nbsp;<i  class="btn btn-danger delete fa fa-trash" data-id="<%=produtos[i].id_produto%>"></i></td>
                  
                   </tr>
                  
@@ -200,31 +207,85 @@
       
       $('#btn_produtos_cadastrar').click(function()
       {
+        var mensagem = document.querySelector('#msg-erro');
+        mensagem.innerHTML='';
+        
+        console.log(nome);
         debugger;
         $.ajax({
           url:'produtos/create',
           method: 'post',
           // dataType: 'json',
           contentType: 'application/x-www-form-urlencoded',
-          data: {nome:"guilherme", categoria:"guilherme 144", preco_compra:"112", preco_venda:"111", unidade_produto:"11"},
+          data: {nome: document.querySelector('#nome').value, categoria:document.querySelector('#categoria').value, preco_compra:document.querySelector('#preco_compra').value, preco_venda:document.querySelector('#preco_venda').value, unidade_produto:document.querySelector('#unidades').value},
           success : function( result )
           {
             debugger;
-            //$('#produtos').html();
-            $('#produtos').innerHTML = "";
-            debugger;
-            $('#produtos').html(result);
-            alert('foi');
+            console.log(result);
+            
+            var $arrayprodutos=  document.getElementById("arrayprodutos");
+            $($arrayprodutos).append('<tr> <td>'+result.insertId+'</td> <td>'+document.querySelector('#nome').value+'</td> <td>'+document.querySelector('#categoria').value+'</td> <td>'+document.querySelector('#preco_compra').value+'</td> <td>'+document.querySelector('#preco_venda').value+'</td> <td>'+document.querySelector('#unidades').value+'</td> </tr>');
+        console.log($arrayprodutos);
+        var $msg_erro = document.getElementById('msg-erro');
+        $($msg_erro).append('<div class="alert alert-success">Produto Cadastrado Com sucesso !</div>');
+            document.getElementById('nome').value=''; 
+            document.getElementById('categoria').value=''; 
+            document.getElementById('preco_compra').value=''; 
+            document.getElementById('preco_venda').value=''; 
+            document.getElementById('unidades').value=''; 
+
             debugger;
           },
 
           error: function(ex){
-
+            var $msg_erro = document.getElementById('msg-erro');
+            $($msg_erro).append('<div class="alert alert-danger">'+ex.responseText+'</div>');
+            console.log(ex.responseText);
             debugger;
           }
       })
       });
-      
+      $('.delete').click(function(element){
+        debugger;
+        $.ajax({
+          url:'produtos',
+          method:'delete',
+          contentType: 'application/x-www-form-urlencoded',
+          data:{id:element.target.dataset.id},
+          success : function(result)
+          {
+            debugger;
+            var $delete = element.delegateTarget.parentElement.parentElement;
+            $( $delete).remove();
+            var $msg_erro2 = document.getElementById('msg-erro-produto');
+        $($msg_erro2).append('<div class="alert alert-success">Produto Removido Com sucesso!</div>');
+
+        setTimeout(function(){ 
+                $('.alert').remove();   
+            }, 900);
+            
+
+
+
+          }
+        });
+
+      });
+      $('.update').click(function(element)
+      {
+        console.log(element.delegateTarget.parentElement.parentElement);
+        var input = document.createElement('input');
+        input.type='text';
+        input.setAttribute('value', '');
+        var pai = element.target.parentElement;
+        var id = element.target.dataset.id;
+        pai.innerHTML='';
+        pai.appendChild(input);
+        debugger;
+      });
+
+
+
       
 
     });
